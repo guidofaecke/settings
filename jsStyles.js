@@ -21,7 +21,7 @@ var MyObject = (function () {
 })();
 
 var myObject = new MyObject('bar');
-myObject.
+//myObject.
 myObject.publicFun();
 //myObject.pre
 
@@ -218,3 +218,50 @@ var Restaurant = (function() {
     return Restaurant;
 
    })();
+
+
+//----------------
+
+var TestClass = function( ) {
+
+    var privateProperty = 42;
+
+    function privateMethod( ) {
+        alert( "privateMethod, " + privateProperty );
+    }
+
+    this.public = {
+        constructor: TestClass,
+
+        publicProperty: 88,
+        publicMethod: function( ) {
+            alert( "publicMethod" );
+            privateMethod( );
+        }
+    };
+};
+TestClass.prototype = new TestClass( ).public;
+
+//----
+
+Class({
+    Namespace:ABC,
+    Name:"ClassL2",
+    Bases:[ABC.ClassTop],
+    Private:{
+        m_var:2
+    },
+    Protected:{
+        proval:2,
+        fight:Property(function(){
+            this.m_var--;
+            console.log("ClassL2::fight (m_var)" +this.m_var);
+        },[Property.Type.Virtual])
+    },
+    Public:{
+        Fight:function(){
+            console.log("ClassL2::Fight (m_var)"+this.m_var);
+            this.fight();
+        }
+    }
+});
